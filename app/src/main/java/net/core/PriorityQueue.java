@@ -50,11 +50,25 @@ public class PriorityQueue {
         }
     }
     public String toString() {
-        StringBuilder buffer = new StringBuilder();
+        StringBuffer buffer = new StringBuffer();
         buffer.append("Counter 1: ").append(counter1.toString().concat("\n"));
         buffer.append("Counter 2: ").append(counter2.toString().concat("\n"));
         buffer.append("Counter 3: ").append(counter3.toString().concat("\n"));
         buffer.append("Priority Lane: ").append(important.toString().concat("\n"));
         return buffer.toString();
+    }
+    public Queue<Integer> getCounter(Counter counter) {
+        switch(counter) {
+            case COUNTER1:
+                return counter1;
+            case COUNTER2:
+                return counter2;
+            case COUNTER3:
+                return counter3;
+            case PRIORITY:
+                return important;
+            default:
+                return null;
+        }
     }
 }

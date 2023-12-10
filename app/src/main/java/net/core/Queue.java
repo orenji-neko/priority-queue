@@ -31,11 +31,12 @@ public class Queue<T> {
         length++;
     }
     public T dequeue() {
-        Node<T> out = head;
         if(head == null && tail == null) {
             return null;
         }
-        else if(head == tail) {
+
+        Node<T> out = head;
+        if(head == tail) {
             head = null;
             tail = null;
         }
@@ -50,7 +51,7 @@ public class Queue<T> {
         return head.data;
     }
     public String toString() {
-        StringBuilder output = new StringBuilder();
+        StringBuffer output = new StringBuffer();
         for(Node<T> current = tail; current != null; current = current.next)
             output.append(" ").append(current.data);
         return output.toString();
