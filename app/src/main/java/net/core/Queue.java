@@ -13,6 +13,9 @@ public class Queue<T> {
     public boolean isEmpty() {
         return length <= 0;
     }
+    public int length() {
+        return length;
+    }
     // Queue Operations
     public void enqueue(T object) {
         if(tail == null) {
