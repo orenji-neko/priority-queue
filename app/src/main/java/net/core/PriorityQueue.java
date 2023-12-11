@@ -6,7 +6,6 @@ public class PriorityQueue {
     Queue<Integer> counter3;
     Queue<Integer> important;
     int current;
-    int counter;
     public PriorityQueue() {
         counter1 = new Queue<>();
         counter2 = new Queue<>();
@@ -14,22 +13,48 @@ public class PriorityQueue {
         important = new Queue<>();
 
         current = 1;
-        counter = 0;
     }
-    public void addPriority() {
-        switch(counter % 3) {
-            case 0:
+
+    /**
+     * Automatically adds a priority according to the lengths of the three queues.
+     */
+    public void autoAddPriority() {
+        int a = counter1.length();
+        int b = counter2.length();
+        int c = counter3.length();
+
+        // lowest among three
+        if(a < b && a < c)
+            counter1.enqueue(current);
+        else if(b < a && b < c)
+            counter2.enqueue(current);
+        else if(c < a && c < b)
+            counter3.enqueue(current);
+        else if(a > b && a > c && b == c)
+            counter2.enqueue(current);
+        else
+            counter1.enqueue(current);
+
+        // increment
+        current++;
+    }
+    public void addPriority(Counter counter) {
+        switch(counter) {
+            case COUNTER1:
                 counter1.enqueue(current++);
                 break;
-            case 1:
+            case COUNTER2:
                 counter2.enqueue(current++);
                 break;
-            case 2:
+            case COUNTER3:
                 counter3.enqueue(current++);
                 break;
+            case PRIORITY:
+                important.enqueue(current++);
+                break;
         }
-        counter++;
     }
+
     public void addImportantPriority() {
         important.enqueue(current++);
     }
