@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Window extends JFrame {
-    private JButton addPriorityButton, servePriorityButton;
+    private JButton autoAddPriorityButton, addPriorityButton, servePriorityButton;
     private  JComboBox<String> counterChoices;
     private PriorityQueue priorityQueue;
     private CounterWindow counterWindow;
@@ -21,13 +21,37 @@ public class Window extends JFrame {
         // priority queue
         priorityQueue = new PriorityQueue();
 
+        // auto add
+        autoAddPriorityButton = new JButton("Auto Add Priority");
+        autoAddPriorityButton.setBounds(new Rectangle(10, 10, 120, 30));
+        autoAddPriorityButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                priorityQueue.autoAddPriority();
+                updateCounterWindow();
+            }
+        });
+
         // add Priority
         addPriorityButton = new JButton("Add Priority");
-        addPriorityButton.setBounds(new Rectangle(10, 10, 120, 30));
+        addPriorityButton.setBounds(new Rectangle(10, 40, 120, 30));
         addPriorityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                priorityQueue.addPriority();
+                switch(counterChoices.getSelectedIndex()) {
+                    case 0:
+                        priorityQueue.addPriority(Counter.COUNTER1);
+                        break;
+                    case 1:
+                        priorityQueue.addPriority(Counter.COUNTER2);
+                        break;
+                    case 2:
+                        priorityQueue.addPriority(Counter.COUNTER3);
+                        break;
+                    case 3:
+                        priorityQueue.addPriority(Counter.PRIORITY);
+                        break;
+                }
                 updateCounterWindow();
             }
         });
@@ -37,7 +61,7 @@ public class Window extends JFrame {
 
         // serve priority
         servePriorityButton = new JButton("Serve Counter");
-        servePriorityButton.setBounds(new Rectangle(10, 40, 120, 30));
+        servePriorityButton.setBounds(new Rectangle(10, 80, 120, 30));
         servePriorityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -61,6 +85,7 @@ public class Window extends JFrame {
 
         // adding components in order
         add(counterChoices);
+        add(autoAddPriorityButton);
         add(addPriorityButton);
         add(servePriorityButton);
 
