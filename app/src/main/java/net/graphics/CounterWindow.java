@@ -20,10 +20,22 @@ public class CounterWindow extends JPanel{
         frame.setVisible(true);
     }
     public void updateCounters(int p1, int p2, int p3, int vip) {
-        counter1 = String.valueOf(p1);
-        counter2 = String.valueOf(p2);
-        counter3 = String.valueOf(p3);
-        important = String.valueOf(vip);
+        if(p1 == 0)
+            counter1 = "";
+        else
+            counter1 = String.valueOf(p1);
+        if(p2 == 0)
+            counter2 = "";
+        else
+            counter2 = String.valueOf(p2);
+        if(p3 == 0)
+            counter3 = "";
+        else
+            counter3 = String.valueOf(p3);
+        if(vip == 0)
+            important = "";
+        else
+            important = String.valueOf(vip);    
 
         repaint();
     }
